@@ -1,0 +1,70 @@
+name: Terraform deploy
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+  ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+  ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+  TF_VAR_resource_group_name: ${{ vars.TF_VAR_RESOURCE_GROUP_NAME }}
+  TF_VAR_location: ${{ vars.TF_VAR_LOCATION }}
+  TF_IN_AUTOMATION: "true"
+
+jobs:
+  plan:
+    name: terraform plan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hashicorp/setup-terraform@v3
+
+      - name: Init
+        run: terraform init -input=false
+
+      - name: Plan
+        run: terraform plan -input=false -no-color -out=tfplan
+
+      - name: Plan summary
+        run: |
+          {
+            echo '### terraform plan'
+            echo '```'
+            terraform show -no-color tfplan
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tfplan
+          path: tfplan
+          retention-days: 1
+
+  apply:
+    name: terraform apply
+    needs: plan
+    runs-on: ubuntu-latest
+    # Ręczna zgoda: Settings -> Environments -> production -> Required reviewers
+    environment: production
+    concurrency:
+      group: terraform-apply
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hashicorp/setup-terraform@v3
+
+      - name: Init
+        run: terraform init -input=false
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: tfplan
+
+      - name: Apply
+        run: terraform apply -input=false tfplan
