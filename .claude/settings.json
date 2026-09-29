@@ -1,0 +1,70 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(terraform init)",
+      "Bash(terraform init *)",
+      "Bash(terraform fmt)",
+      "Bash(terraform fmt *)",
+      "Bash(terraform validate)",
+      "Bash(terraform validate *)",
+      "Bash(terraform plan)",
+      "Bash(terraform plan *)",
+      "Bash(terraform show *)",
+      "Bash(terraform output *)",
+      "Bash(terraform state list)",
+      "Bash(terraform state show *)",
+      "Bash(az * list *)",
+      "Bash(az * show *)"
+    ],
+    "ask": [
+      "Bash(terraform apply)",
+      "Bash(terraform apply *)",
+      "Bash(terraform destroy)",
+      "Bash(terraform destroy *)"
+    ],
+    "deny": [
+      "Bash(az login *)",
+      "Bash(az logout *)",
+      "Bash(az account set *)",
+      "Bash(az role *)",
+      "Bash(az policy *)",
+      "Bash(az ad *)",
+      "Bash(az provider *)",
+      "Bash(az lock *)",
+      "Bash(az group create *)",
+      "Bash(az group delete *)",
+      "Bash(terraform state rm *)",
+      "Bash(terraform state push *)",
+      "Bash(terraform force-unlock *)",
+      "Bash(printenv *)",
+      "Bash(env)",
+      "Bash(env *)",
+      "Read(~/.tf-training/**)",
+      "Read(./credentials/**)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/guard-terraform.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/tf-check.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
