@@ -4,25 +4,6 @@ variable "alert_email" {
   default     = "student@example.com"
 }
 
-resource "azurerm_log_analytics_workspace" "main" {
-  name                = "log-demo-${random_string.suffix.result}"
-  resource_group_name = data.azurerm_resource_group.main.name
-  location            = var.location
-  sku                 = "PerGB2018"
-  retention_in_days   = 30
-  daily_quota_gb      = 0.5
-  tags                = data.azurerm_resource_group.main.tags
-}
-
-resource "azurerm_application_insights" "main" {
-  name                = "appi-demo-${random_string.suffix.result}"
-  resource_group_name = data.azurerm_resource_group.main.name
-  location            = var.location
-  workspace_id        = azurerm_log_analytics_workspace.main.id
-  application_type    = "web"
-  tags                = data.azurerm_resource_group.main.tags
-}
-
 resource "azurerm_monitor_action_group" "main" {
   name                = "ag-demo"
   resource_group_name = data.azurerm_resource_group.main.name
