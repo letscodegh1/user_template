@@ -27,6 +27,5 @@ zapisuj do plików.
 3. Pokaż użytkownikowi krótkie podsumowanie planu i poproś o zgodę.
 4. `terraform apply` **bez** `-auto-approve`. Użytkownik zatwierdza go sam.
 5. Zweryfikuj wynik (`terraform output`, `az resource list -g $TF_VAR_resource_group_name -o table`).
-6. Na koniec ćwiczenia posprzątaj: `terraform destroy` (też za zgodą użytkownika).
 
 Odpowiadaj po polsku, zwięźle.
