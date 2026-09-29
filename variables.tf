@@ -4,7 +4,7 @@ variable "resource_group_name" {
 }
 
 variable "location" {
-  description = "Region piaskownicy (ustawiany przez TF_VAR_location)."
+  description = "Region demo (ustawiany przez TF_VAR_location)."
   type        = string
   default     = "westeurope"
 }

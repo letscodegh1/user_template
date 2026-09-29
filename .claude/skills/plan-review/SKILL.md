@@ -1,6 +1,6 @@
 ---
 name: plan-review
-description: Uruchamia terraform plan i oddaje go do recenzji subagentowi tf-reviewer (zgodność z piaskownicą, koszt, bezpieczeństwo).
+description: Uruchamia terraform plan i oddaje go do recenzji subagentowi tf-reviewer (zgodność z demo, koszt, bezpieczeństwo).
 disable-model-invocation: true
 allowed-tools: Bash(terraform plan) Bash(terraform plan *)
 ---

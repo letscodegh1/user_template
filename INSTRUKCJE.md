@@ -1,6 +1,6 @@
 # Instrukcja dla kursanta — Terraform + Claude Code na Azure
 
-Masz własną, odizolowaną piaskownicę w Azure: jedną grupę zasobów (resource group) i tożsamość,
+Masz własną, odizolowaną demo w Azure: jedną grupę zasobów (resource group) i tożsamość,
 która ma prawo tworzyć zasoby **wyłącznie** w tej grupie. Poniżej krok po kroku, jak zacząć.
 
 ## 1. Czego potrzebujesz
@@ -57,7 +57,7 @@ o zgodę na każdą pojedynczą komendę.
 5. Sprawdź efekt: `terraform output`, `az resource list -g $TF_VAR_resource_group_name -o table`.
 6. Na koniec ćwiczenia posprzątaj: `terraform destroy` (też zatwierdzasz sam).
 
-## 5. Zasady piaskownicy — czego nie da się przeskoczyć
+## 5. Zasady demo — czego nie da się przeskoczyć
 
 - Twoja grupa zasobów **już istnieje** — nie twórz jej, tylko odwołuj się do niej (`data`, nie `resource`).
 - Wszystko powstaje w regionie `westeurope` — inne regiony blokuje polityka Azure.
@@ -69,7 +69,7 @@ o zgodę na każdą pojedynczą komendę.
 - Nazwy, które muszą być globalnie unikalne (storage account, Key Vault...), potrzebują losowego
   sufiksu — użyj `random_string`.
 - Nie próbuj obchodzić uprawnień ani polityk. Jeśli dostaniesz `AuthorizationFailed` albo
-  `RequestDisallowedByPolicy` — to twarda granica piaskownicy, nie błąd do "przechytrzenia".
+  `RequestDisallowedByPolicy` — to twarda granica demo, nie błąd do "przechytrzenia".
   Poproś agenta o tańszą/mniejszą alternatywę albo zapytaj prowadzącego.
 
 ## 6. Typowe błędy
@@ -88,5 +88,5 @@ o zgodę na każdą pojedynczą komendę.
 terraform destroy
 ```
 
-Posprzątaj wszystko, co stworzyłeś/aś, zanim skończysz. Prowadzący i tak usunie całą piaskownicę
+Posprzątaj wszystko, co stworzyłeś/aś, zanim skończysz. Prowadzący i tak usunie całą demo
 po zajęciach, ale dobra praktyka to sprzątanie po sobie.

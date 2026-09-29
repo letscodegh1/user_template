@@ -33,3 +33,22 @@ resource "azurerm_monitor_activity_log_alert" "deletes" {
     action_group_id = azurerm_monitor_action_group.main.id
   }
 }
+
+resource "azurerm_log_analytics_workspace" "main" {
+  name                = "log-demo-${random_string.suffix.result}"
+  location            = var.location
+  resource_group_name = data.azurerm_resource_group.main.name
+  sku                 = "PerGB2018"
+  retention_in_days   = 30
+  daily_quota_gb      = 1
+  tags                = data.azurerm_resource_group.main.tags
+}
+
+resource "azurerm_application_insights" "main" {
+  name                = "appi-demo-${random_string.suffix.result}"
+  location            = var.location
+  resource_group_name = data.azurerm_resource_group.main.name
+  workspace_id        = azurerm_log_analytics_workspace.main.id
+  application_type    = "web"
+  tags                = data.azurerm_resource_group.main.tags
+}

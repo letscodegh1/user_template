@@ -1,6 +1,6 @@
-# Piaskownica Terraform na Azure (szkolenie)
+# Demo Terraform na Azure (szkolenie)
 
-Pracujesz w ograniczonej piaskownicy. Masz uprawnienia Contributor **tylko** na jednej,
+Pracujesz w ograniczonej demo. Masz uprawnienia Contributor **tylko** na jednej,
 już istniejącej grupie zasobów. Poświadczenia i nazwa RG są w zmiennych środowiskowych
 (`ARM_*`, `TF_VAR_resource_group_name`, `TF_VAR_location`), więc nigdy ich nie wypisuj i nie
 zapisuj do plików.
@@ -18,7 +18,7 @@ zapisuj do plików.
   NAT Gateway, AKS, Databricks, Synapse, Cosmos DB, Cognitive Services, Front Door/CDN.
 - Nazwy storage account, Key Vault itp. muszą być globalnie unikalne. Dodaj losowy sufiks (`random_string`).
 - Nie próbuj obchodzić uprawnień ani polityk. Przy `AuthorizationFailed` albo `RequestDisallowedByPolicy`
-  zaproponuj tańsze lub mniejsze rozwiązanie albo powiedz użytkownikowi, że to blokada piaskownicy.
+  zaproponuj tańsze lub mniejsze rozwiązanie albo powiedz użytkownikowi, że to blokada demo.
 
 ## Sposób pracy
 
