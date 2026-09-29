@@ -49,12 +49,12 @@ Testów nie ma. Weryfikacją jest `fmt` + `validate` + `plan`.
 ## Architektura
 
 - Płaski root module, bez podmodułów i bez zdalnego backendu (stan lokalny). Zasoby są podzielone na pliki
-  tematyczne: `network.tf`, `security.tf` (`random_string.suffix`), `monitoring.tf` (action group + alert
-  na usunięcie RG), `main.tf` (`data` RG + output). Zmienne są w `variables.tf`, a `alert_email` w `monitoring.tf`.
+  tematyczne: `network.tf`, `security.tf` (`random_string.suffix`), `monitoring.tf` (action group; alert
+  na usunięcie RG to zadanie dla kursantów), `main.tf` (`data` RG + output). Zmienne są w `variables.tf`, a `alert_email` w `monitoring.tf`.
 - Pliki `*.disabled` (`vm.tf.disabled`, `storage.tf.disabled`) to gotowe, wyłączone przykłady ćwiczeń
   (VM nginx `Standard_B1s`, storage account). Terraform je ignoruje. Włączasz je przez usunięcie
   rozszerzenia `.disabled`. Pamiętaj o limicie 1 VM.
-- Alert w `monitoring.tf` ma `location = "global"`, więc jest jedynym wyjątkiem od zasady `var.location`.
+- Alert activity log (zadanie kursantów) ma `location = "global"`, więc jest jedynym wyjątkiem od zasady `var.location`.
 
 ## Automatyzacja w `.claude/`
 
