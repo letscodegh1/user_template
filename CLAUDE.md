@@ -55,6 +55,9 @@ Testów nie ma. Weryfikacją jest `fmt` + `validate` + `plan`.
   (VM nginx `Standard_B1s`, storage account). Terraform je ignoruje. Włączasz je przez usunięcie
   rozszerzenia `.disabled`. Pamiętaj o limicie 1 VM.
 - Alert activity log (zadanie kursantów) ma `location = "global"`, więc jest jedynym wyjątkiem od zasady `var.location`.
+- `INSTRUKCJE.md` to onboarding dla kursanta (setup środowiska, `source studentNN.env`) — zawiera tabelę
+  typowych błędów (`AuthorizationFailed`, `RequestDisallowedByPolicy`, `QuotaExceeded`, `AADSTS7000215`),
+  przydatną przy diagnozowaniu problemów z `apply`.
 
 ## Automatyzacja w `.claude/`
 
